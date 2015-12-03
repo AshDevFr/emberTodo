@@ -1,0 +1,30 @@
+web:
+  build: .
+  dockerfile: Dockerfile_dev
+  command: serve --watcher=polling --proxy http://api:4210
+  volumes:
+   - ./app/:/home/workspace/app
+   - ./config/:/home/workspace/config
+   - ./public/:/home/workspace/public
+   - ./tests/:/home/workspace/tests
+   - ./vendor/:/home/workspace/vendor
+  ports:
+   - "4200:4200"
+   - "49152:49152"
+  links:
+   - node
+node:
+  build: .
+  hostname: api
+  dockerfile: Dockerfile_back
+  command: node server/server.js
+  volumes:
+   - ./back:/home/workspace/server
+  ports:
+   - "4210:4210"
+  links:
+   - db
+db:
+   image: mongo:latest
+   ports:
+   - "27017:27017"

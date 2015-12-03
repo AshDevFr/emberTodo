@@ -1,0 +1,16 @@
+FROM ashdev/docker-nodejs:v4.2.2
+MAINTAINER AshDev <ashdevfr@gmail.com>
+
+ENV workdir_path /home/workspace
+WORKDIR ${workdir_path}/
+
+ADD package.json ${workdir_path}/
+
+RUN git config --global url."https://".insteadOf git://
+
+RUN npm install -g node-gyp
+RUN npm install
+
+EXPOSE 4210
+
+VOLUME ${workdir_path}
