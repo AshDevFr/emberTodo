@@ -1,0 +1,21 @@
+{{input id="new-todo" type="text" value=newTitle enter="create" placeholder="What needs to be done?"}}
+{{outlet}}
+{{#if model}}
+   <footer id="footer">
+      <span id="todo-count"><strong>{{model.length}}</strong> {{pluralize 'item' model.length}}</span>
+      <ul id="filters">
+         <li>
+            {{#link-to "todos.index" activeClass="selected"}}All{{/link-to}}
+         </li>
+         <li>
+            {{#link-to "todos.incomplete" activeClass="selected"}}Active{{/link-to}}
+         </li>
+         <li>
+            {{#link-to "todos.complete" activeClass="selected"}}Completed{{/link-to}}
+         </li>
+      </ul>
+      {{#if completed.length}}
+         <button id="clear-completed" {{action "clearCompleted"}}>Clear completed</button>
+      {{/if}}
+   </footer>
+{{/if}}
