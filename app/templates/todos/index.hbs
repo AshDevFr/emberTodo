@@ -1,8 +1,6 @@
 {{#if model}}
    <section id="main">
-      {{#if canToggle}}
-         {{input type="checkbox" id="toggle-all" checked=allTodos.allAreDone}}
-      {{/if}}
+      {{input type="checkbox" id="toggle-all" checked=allAreDone}}
       <ul id="todo-list">
          {{#each model as |todo|}}
             {{todo-item todo=todo}}
