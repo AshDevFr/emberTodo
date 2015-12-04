@@ -24,7 +24,7 @@ module.exports = function() {
   });
 
   router.post('/', function(req, res, next) {
-    Todo.create(req.body, function(err, todo) {
+    Todo.create(req.body.todo, function(err, todo) {
       if (err) return next(err);
       res.json({
         todo : todo
@@ -33,7 +33,7 @@ module.exports = function() {
   });
 
   router.put('/:id', function(req, res, next) {
-    Todo.findByIdAndUpdate(req.params.id, req.body, function(err, todo) {
+    Todo.findByIdAndUpdate(req.params.id, req.body.todo, {new: true}, function(err, todo) {
       if (err) return next(err);
       res.json({
         todo : todo
