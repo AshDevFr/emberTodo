@@ -23,18 +23,18 @@ export default Ember.Controller.extend({
       completed.invoke('destroyRecord');
     }
   },
-  remaining : function() {
+  remaining : Ember.computed('model.length', 'model.@each.isDone', function() {
     let todos = this.get('model').filter((todo) => {
       return !todo.get('isDone');
     });
     return todos.length;
-  }.property('model.length', 'model.@each.isDone'),
-  done      : function() {
+  }),
+  done      : Ember.computed('model.length', 'model.@each.isDone', function() {
     let todos = this.get('model').filter((todo) => {
       return todo.get('isDone');
     });
     return todos;
-  }.property('model.length', 'model.@each.isDone'),
+  }),
   hasDone   : Ember.computed('done', function() {
     return this.get('done').length > 0;
   })
