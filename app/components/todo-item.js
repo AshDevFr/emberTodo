@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName           : 'li',
-  classNameBindings : ['isDone:completed', 'isEditing:editing'],
+  classNameBindings : ['todo.isDone:completed', 'isEditing:editing'],
   isEditing         : false,
   actions           : {
     edit   : function() {
